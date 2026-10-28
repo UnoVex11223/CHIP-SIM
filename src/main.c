@@ -163,21 +163,25 @@ int main(void)
       while (!keep_prompting)
       {  
          printf("Would you like to modify another register ? : 1 (yes) | 0 (no) \n");
-         if ((scanf("%d", &choice) == 1) && (choice == 1))
+         scanf("%d", &choice);
+
+         switch (choice)
          {
-            keep_prompting = 1;
-            game_loop = 1;
-         } 
-         else if ((scanf("%d", &choice) == 1) && (choice == 0))
-         {
-             keep_prompting = 1;
-             game_loop = 0;
-             return 0;
+            case 0:
+                keep_prompting = 1;
+                game_loop = 1;
+                break;
+            case 1:
+                keep_prompting = 0;
+                game_loop = 0;
+                break;
+            default:
+              printf("Please enter a valid value: ");
+              break;  
+
+
          }
-         else
-         {
-             printf("Please enter a valid option: \n");
-         }
+            
       }
       keep_prompting = 0;
    }
