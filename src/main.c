@@ -172,7 +172,7 @@ int main(void)
                 game_loop = 1;
                 break;
             case 1:
-                keep_prompting = 0;
+                keep_prompting = 1;
                 game_loop = 0;
                 break;
             default:
