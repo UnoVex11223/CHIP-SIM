@@ -1,18 +1,22 @@
 CC = gcc
 CFLAGS = -std=c11 -Wall -Wextra -Wpedantic
 
-chipsim: main.o pc.o, ram8.o
-	$(CC) $(CFLAGS) main.o pc.o ram8.0 -o chipsim
+SRC = src
+BUILD = build
+OBJS = $(BUILD)/main.o $(BUILD)/pc.o $(BUILD)/ram8.o
 
-main.o: main.c pc.h ram8.c
-	$(CC) $(CFLAGS) -c main.c
+$(BUILD)/chipsim: $(OBJS)
+	@echo "Linking $@"
+	@$(CC) $(CFLAGS) $^ -o $@
 
-pc.o: pc.c pc.h
-	$(CC) $(CFLAGS) -c pc.c
+$(BUILD)/%.o: $(SRC)/%.c $(SRC)/*.h
+	@mkdir -p $(BUILD)
+	@echo "Compiling $<"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-ram8.o: ram8.c ram8.h
-   $(CC) $(CFLAGS) -c ram8.c	
+run: $(BUILD)/chipsim
+	@./$(BUILD)/chipsim
 
-.PHONY: clean
 clean:
-	rm -f chipsim main.o pc.o
+	@rm -rf $(BUILD)
+	@echo "Clenaed"

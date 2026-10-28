@@ -1,3 +1,2 @@
-chipsim
-*.o
+build/
 *.swp
